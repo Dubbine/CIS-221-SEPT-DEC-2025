@@ -1,371 +1,184 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <title>Fashion Store</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    /* --- Simple, eye-catching CSS --- */
-    :root{
-      --accent:#ff4785;
-      --accent-2:#3b82f6;
-      --muted:#6b7280;
-      --card:#ffffff;
-      --glass: rgba(255,255,255,0.7);
-      --shadow: 0 6px 18px rgba(19, 24, 44, 0.08);
-      --rounded: 14px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #fff, #f5f5f5);
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background: linear-gradient(135deg, #fff7fb 0%, #f0f9ff 50%, #f7fff3 100%);
-      color:#111827;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:28px;
+    header {
+      background: #ff6b6b;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
     }
-    .container{max-width:1150px;margin:0 auto;}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
-    h1{font-size:30px;margin:0; letter-spacing:-0.5px;}
-    header .tag{color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px;}
-    @media (max-width:900px){ .grid{grid-template-columns:1fr;}}
-    .card{background:var(--glass);backdrop-filter: blur(6px); padding:18px;border-radius:var(--rounded);box-shadow:var(--shadow);}
-    .products {display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-    @media (max-width:700px){ .products{grid-template-columns:1fr;} }
-    .product{display:flex;gap:12px;padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfbff);border:1px solid rgba(0,0,0,0.03)}
-    .product img{width:110px;height:110px;object-fit:cover;border-radius:10px;flex-shrink:0;}
-    .product .meta{flex:1;display:flex;flex-direction:column;justify-content:space-between}
-    .price{font-weight:700;color:#111827}
-    .small{font-size:13px;color:var(--muted)}
-    .controls{display:flex;gap:6px;align-items:center}
-    input[type="number"]{width:86px;padding:6px;border-radius:8px;border:1px solid #e5e7eb}
-    button{padding:8px 10px;border-radius:8px;border:0;cursor:pointer}
-    .btn-buy{background:linear-gradient(90deg,var(--accent), #ff8ab8);color:white}
-    .btn-sell{background:linear-gradient(90deg,var(--accent-2),#60a5fa);color:white}
-    .search-row{display:flex;gap:8px;align-items:center;margin-bottom:12px}
-    .search-row input{flex:1;padding:10px;border-radius:10px;border:1px solid #e6e9ef}
-    .right-col{display:flex;flex-direction:column;gap:14px}
-    table{width:100%;border-collapse:collapse;font-size:13px}
-    th,td{padding:8px;text-align:left;border-bottom:1px solid #f1f5f9}
-    th{font-weight:600;color:#111827}
-    .offers table tr td:first-child{font-weight:600}
-    ul.benefits{padding-left:18px;color:var(--muted);margin:0}
-    .totals{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-    .footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
-    .top-stats{display:flex;gap:12px}
-    .stat{background:linear-gradient(180deg,#fff,#fbfdff);padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.03);min-width:120px}
-    .export-btn{background:#111827;color:white;padding:8px 10px;border-radius:8px;border:0;cursor:pointer}
-    .note{font-size:13px;color:#374151}
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      padding: 40px;
+      text-align: center;
+      background: #ffecec;
+    }
+    .products {
+      padding: 20px;
+    }
+    .products h2 {
+      text-align: center;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    .card h4 {
+      margin: 10px 0 5px;
+    }
+    .price {
+      font-weight: bold;
+      color: #222;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #ff6b6b;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    .sales {
+      padding: 20px;
+    }
+    .sales-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .sales-table th, .sales-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    .benefits {
+      margin-top: 20px;
+    }
+    .benefits ul {
+      list-style: none;
+      padding: 0;
+    }
+    .benefits li::before {
+      content: "✔ ";
+      color: green;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #ff6b6b;
+      color: #fff;
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Fashion Store</h1>
-        <div class="tag">Quality styles • Fair prices • Fast service</div>
+  <header>
+    <h1>Fashion Store</h1>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#sales">Sales</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Style. Comfort. Confidence.</h2>
+    <p>Discover the best fashion at unbeatable prices.</p>
+  </section>
+
+  <section class="products" id="products">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200?text=White+Tee" alt="White Tee">
+        <h4>Classic White Tee</h4>
+        <p class="price">KSh 1,200</p>
+        <a href="#" class="btn">Buy</a>
       </div>
-      <div style="text-align:right">
-        <div class="top-stats">
-          <div class="stat">
-            <div class="small">Total Revenue</div>
-            <div id="totalRevenue" style="font-weight:800;font-size:18px">KSh 0</div>
-          </div>
-          <div class="stat">
-            <div class="small">Total Items</div>
-            <div id="totalItems" style="font-weight:800;font-size:18px">0</div>
-          </div>
-        </div>
-        <div style="margin-top:8px" class="note">Due date: <strong>1 October 2025</strong></div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200?text=Denim+Jacket" alt="Denim Jacket">
+        <h4>Denim Jacket</h4>
+        <p class="price">KSh 4,500</p>
+        <a href="#" class="btn">Buy</a>
       </div>
-    </header>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200?text=Summer+Dress" alt="Summer Dress">
+        <h4>Summer Dress</h4>
+        <p class="price">KSh 3,200</p>
+        <a href="#" class="btn">Buy</a>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200?text=Sneakers" alt="Sneakers">
+        <h4>Sneakers</h4>
+        <p class="price">KSh 5,600</p>
+        <a href="#" class="btn">Buy</a>
+      </div>
+    </div>
+  </section>
 
-    <main class="grid">
-      <!-- Left: products showcase -->
-      <section>
-        <div class="card">
-          <div class="search-row">
-            <input id="searchInput" placeholder="Search products or categories..." />
-            <button id="addDemo" class="export-btn">+ Add demo product</button>
-            <button id="exportBtn" class="export-btn" title="Download inventory as JSON">Export JSON</button>
-            <input id="importFile" type="file" accept=".json" style="display:none" />
-            <button id="importBtn" class="export-btn" title="Import inventory JSON">Import JSON</button>
-          </div>
+  <section class="sales" id="sales">
+    <h2>Upcoming Sales</h2>
+    <table class="sales-table">
+      <tr>
+        <th>Sale</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Discount</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td>End of Season</td>
+        <td>2025-10-01</td>
+        <td>2025-10-10</td>
+        <td>25%</td>
+        <td>Extra on selected items</td>
+      </tr>
+      <tr>
+        <td>Black Friday</td>
+        <td>2025-11-28</td>
+        <td>2025-11-29</td>
+        <td>40%</td>
+        <td>Sitewide limited stock</td>
+      </tr>
+    </table>
+    <div class="benefits">
+      <h3>Why shop with us?</h3>
+      <ul>
+        <li>Free delivery above KSh 3,000</li>
+        <li>Hassle-free returns within 14 days</li>
+        <li>Secure payments</li>
+        <li>Exclusive deals for members</li>
+      </ul>
+    </div>
+  </section>
 
-          <div id="productsList" class="products" aria-live="polite"></div>
-        </div>
-
-        <div style="margin-top:14px" class="card">
-          <h3 style="margin-top:0">Benefits of shopping with us</h3>
-          <ul class="benefits">
-            <li>Quality-checked items — we curate styles that last.</li>
-            <li>Transparent pricing — no hidden fees.</li>
-            <li>Easy returns within 14 days.</li>
-            <li>Fast local delivery and secure payment options.</li>
-            <li>Frequent seasonal discounts — great value for money.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Right: offers and inventory tables -->
-      <aside class="right-col">
-        <div class="card offers">
-          <h3 style="margin-top:0">Upcoming Sale Offers</h3>
-          <table>
-            <thead>
-              <tr><th>Offer</th><th>Start</th><th>End</th><th>Details</th></tr>
-            </thead>
-            <tbody id="offersTbody"></tbody>
-          </table>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">Inventory Tracker</h3>
-          <div style="max-height:300px;overflow:auto">
-            <table id="inventoryTable">
-              <thead><tr><th>Item</th><th>Bought</th><th>Sold</th><th>In stock</th><th>Revenue</th></tr></thead>
-              <tbody></tbody>
-            </table>
-          </div>
-          <div class="totals">
-            <div class="small">Note: purchase = items added to store stock</div>
-            <div style="font-weight:700" id="totalRevenueSmall">KSh 0</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">Quick actions</h3>
-          <div style="display:flex;gap:8px">
-            <button id="resetBtn" style="background:#ef4444;color:white;padding:8px;border-radius:8px">Reset Data</button>
-            <button id="clearLocal" style="background:#f59e0b;color:white;padding:8px;border-radius:8px">Clear LocalStorage</button>
-          </div>
-          <div style="margin-top:10px;font-size:13px;color:var(--muted)">
-            Save this file as <strong>fashion-store.html</strong> and open in your browser. Data persists in browser localStorage.
-          </div>
-        </div>
-      </aside>
-    </main>
-
-    <div class="footer">© <span id="year"></span> Fashion Store. All rights reserved.</div>
-  </div>
-
-  <script>
-    /***********************
-     * Single-file "database" using localStorage
-     * - products[]: each product {id,name,category,price,image,purchased,sold}
-     * - offers[]: sale offers
-     * - functions to buy (add purchased qty) and sell (increment sold up to stock)
-     ************************/
-
-    const LS_KEY = 'fashion_store_inventory_v1';
-
-    // Sample data (seed)
-    const SAMPLE_PRODUCTS = [
-      { id:1, name:'Classic White Shirt', category:'Shirts', price:1200, image:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&q=60', purchased:50, sold:10 },
-      { id:2, name:'Blue Denim Jeans', category:'Pants', price:2500, image:'https://images.unsplash.com/photo-1472417583565-62e7bdeda490?w=800&q=60', purchased:40, sold:25 },
-      { id:3, name:'Red Party Dress', category:'Dresses', price:4500, image:'https://images.unsplash.com/photo-1520975912681-6f27738c2d2f?w=800&q=60', purchased:20, sold:5 },
-      { id:4, name:'Black Leather Jacket', category:'Outerwear', price:8000, image:'https://images.unsplash.com/photo-1520975698513-0c4d02a5a2c9?w=800&q=60', purchased:15, sold:9 }
-    ];
-
-    const SAMPLE_OFFERS = [
-      { id:1, name:'End-of-Season Clearance', start:'2025-10-05', end:'2025-10-12', discount:'Up to 60%'},
-      { id:2, name:'Buy 2 Get 1 (Selected Items)', start:'2025-11-01', end:'2025-11-07', discount:'Buy 2 Get 1 Free'},
-      { id:3, name:'Black Friday Flash', start:'2025-11-28', end:'2025-11-29', discount:'Site-wide 40%'}
-    ];
-
-    // Load or initialize DB
-    let DB = (function load(){
-      try {
-        const raw = localStorage.getItem(LS_KEY);
-        if(raw){
-          return JSON.parse(raw);
-        } else {
-          const init = { products: SAMPLE_PRODUCTS, offers: SAMPLE_OFFERS };
-          localStorage.setItem(LS_KEY, JSON.stringify(init));
-          return init;
-        }
-      } catch(e){
-        console.error('Could not parse localStorage, seeding samples', e);
-        const init = { products: SAMPLE_PRODUCTS, offers: SAMPLE_OFFERS };
-        localStorage.setItem(LS_KEY, JSON.stringify(init));
-        return init;
-      }
-    })();
-
-    // DOM refs
-    const productsList = document.getElementById('productsList');
-    const inventoryBody = document.querySelector('#inventoryTable tbody');
-    const offersTbody = document.getElementById('offersTbody');
-    const totalRevenueEl = document.getElementById('totalRevenue');
-    const totalRevenueSmall = document.getElementById('totalRevenueSmall');
-    const totalItemsEl = document.getElementById('totalItems');
-    const searchInput = document.getElementById('searchInput');
-    const yearSpan = document.getElementById('year');
-    yearSpan.textContent = new Date().getFullYear();
-
-    // Render functions
-    function formatKsh(n){ return 'KSh ' + Number(n||0).toLocaleString(); }
-
-    function computeTotals(products){
-      const revenue = products.reduce((s,p)=> s + (Number(p.sold||0) * Number(p.price||0)), 0);
-      const totalItems = products.reduce((s,p)=> s + (Number(p.purchased||0)), 0);
-      return { revenue, totalItems };
-    }
-
-    function renderProducts(filter=''){
-      productsList.innerHTML = '';
-      const list = DB.products.filter(p => {
-        if(!filter) return true;
-        const f = filter.toLowerCase();
-        return p.name.toLowerCase().includes(f) || p.category.toLowerCase().includes(f);
-      });
-      if(list.length === 0){
-        productsList.innerHTML = '<div style="color:var(--muted)">No products match your search</div>';
-        return;
-      }
-      for(const p of list){
-        const item = document.createElement('article');
-        item.className = 'product';
-        item.innerHTML = `
-          <img src="${p.image}" alt="${escapeHtml(p.name)}" />
-          <div class="meta">
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                  <div style="font-weight:700">${escapeHtml(p.name)}</div>
-                  <div class="small">${escapeHtml(p.category)}</div>
-                </div>
-                <div style="text-align:right">
-                  <div class="price">${formatKsh(p.price)}</div>
-                </div>
-              </div>
-              <div style="margin-top:8px" class="small">Purchased: <strong>${p.purchased||0}</strong> &nbsp; Sold: <strong>${p.sold||0}</strong> &nbsp; In stock: <strong>${Math.max(0,(p.purchased||0)-(p.sold||0))}</strong></div>
-            </div>
-
-            <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
-              <div class="controls">
-                <input type="number" min="0" placeholder="buy qty" id="buy-${p.id}" />
-                <button class="btn-buy" data-id="${p.id}" data-action="buy">Buy</button>
-              </div>
-              <div class="controls">
-                <input type="number" min="0" placeholder="sell qty" id="sell-${p.id}" />
-                <button class="btn-sell" data-id="${p.id}" data-action="sell">Sell</button>
-              </div>
-            </div>
-          </div>
-        `;
-        productsList.appendChild(item);
-      }
-      // Attach handler delegation
-      productsList.querySelectorAll('button').forEach(btn=>{
-        btn.addEventListener('click', (ev)=>{
-          const id = Number(btn.dataset.id);
-          const action = btn.dataset.action;
-          if(action === 'buy'){
-            const input = document.getElementById('buy-'+id);
-            const qty = Number(input.value || 0);
-            recordPurchase(id, qty);
-            input.value = '';
-          } else if(action === 'sell'){
-            const input = document.getElementById('sell-'+id);
-            const qty = Number(input.value || 0);
-            recordSale(id, qty);
-            input.value = '';
-          }
-        });
-      });
-    }
-
-    function renderOffers(){
-      offersTbody.innerHTML = '';
-      for(const o of DB.offers){
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${escapeHtml(o.name)}</td><td>${o.start}</td><td>${o.end}</td><td>${escapeHtml(o.discount)}</td>`;
-        offersTbody.appendChild(tr);
-      }
-    }
-
-    function renderInventory(){
-      inventoryBody.innerHTML = '';
-      for(const p of DB.products){
-        const bought = Number(p.purchased||0);
-        const sold = Number(p.sold||0);
-        const instock = Math.max(0, bought - sold);
-        const revenue = sold * Number(p.price||0);
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${escapeHtml(p.name)}</td><td>${bought}</td><td>${sold}</td><td>${instock}</td><td>${formatKsh(revenue)}</td>`;
-        inventoryBody.appendChild(tr);
-      }
-      const totals = computeTotals(DB.products);
-      totalRevenueEl.textContent = formatKsh(totals.revenue);
-      totalRevenueSmall.textContent = formatKsh(totals.revenue);
-      totalItemsEl.textContent = totals.totalItems.toLocaleString();
-    }
-
-    // DB ops
-    function saveDB(){
-      localStorage.setItem(LS_KEY, JSON.stringify(DB));
-    }
-
-    function recordPurchase(productId, qty){
-      if(!qty || qty <= 0) { alert('Enter a positive purchase quantity'); return; }
-      DB.products = DB.products.map(p => {
-        if(p.id === productId) {
-          return {...p, purchased: Number(p.purchased||0) + Number(qty) };
-        }
-        return p;
-      });
-      saveDB(); renderAll();
-    }
-
-    function recordSale(productId, qty){
-      if(!qty || qty <= 0) { alert('Enter a positive sell quantity'); return; }
-      DB.products = DB.products.map(p => {
-        if(p.id === productId){
-          const bought = Number(p.purchased||0);
-          const sold = Number(p.sold||0);
-          const available = Math.max(0, bought - sold);
-          const toSell = Math.min(Number(qty), available);
-          if(toSell <= 0){ alert('Not enough stock to sell that many'); return p; }
-          return {...p, sold: sold + toSell};
-        }
-        return p;
-      });
-      saveDB(); renderAll();
-    }
-
-    // Helpers
-    function escapeHtml(s){
-      if(!s) return '';
-      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    // UI: export / import
-    document.getElementById('exportBtn').addEventListener('click', ()=>{
-      const blob = new Blob([JSON.stringify(DB, null, 2)], {type:'application/json'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'fashion_store_inventory.json'; a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    document.getElementById('importBtn').addEventListener('click', ()=>{
-      document.getElementById('importFile').click();
-    });
-    document.getElementById('importFile').addEventListener('change', (ev)=>{
-      const f = ev.target.files[0];
-      if(!f) return;
-      const reader = new FileReader();
-      reader.onload = function(e){
-        try {
-          const parsed = JSON.parse(e.target.result);
-          if(Array.isArray(parsed.products) && Array.isArray(parsed.offers)){
-            DB = parsed;
-            saveDB(); renderAll(); alert('Imported inventory successfully');
-          } else {
-            alert('Invalid file format: expected {products:[], offers:[]}');
-          }
-        } catch(err){
-          alert('Error parsing JSON: ' + err.message);
-        }
+  <footer>
+    <p>&copy; 2025 Fashion Store. All rights reserved.</p>
+  </footer>
+</body>
+</html>
